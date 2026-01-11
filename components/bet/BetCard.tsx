@@ -50,21 +50,21 @@ export function BetCard({ bet }: BetCardProps) {
             </div>
           </div>
 
-          <div className="flex-1 space-y-6">
-            <h3 className="font-display text-2xl font-black text-white leading-[0.9] uppercase tracking-tighter line-clamp-3 group-hover:text-primary transition-colors italic">
-              {bet.terms}
-            </h3>
+            <div className="flex-1 space-y-6 overflow-hidden">
+              <h3 className="font-display text-2xl font-black text-white leading-[0.9] uppercase tracking-tighter line-clamp-3 group-hover:text-primary transition-colors italic break-words">
+                {bet.terms}
+              </h3>
 
-            <div className="grid grid-cols-2 gap-6 pt-6 border-t border-white/5 font-mono">
-              <div className="space-y-2">
-                <p className="text-[9px] font-black text-zinc-600 uppercase tracking-widest">Opponent_Nexus</p>
-                <div className="flex items-center gap-2 text-zinc-400 font-bold text-[10px] uppercase">
-                  <Users className="w-3.5 h-3.5 text-primary" />
-                  <span className="truncate">
-                    {bet.opponent === '0x0000000000000000000000000000000000000000' ? 'PUBLIC_ARENA' : 'DUAL_COMBAT'}
-                  </span>
+              <div className="grid grid-cols-2 gap-6 pt-6 border-t border-white/5 font-mono">
+                <div className="space-y-2 min-w-0">
+                  <p className="text-[9px] font-black text-zinc-600 uppercase tracking-widest">Opponent_Nexus</p>
+                  <div className="flex items-center gap-2 text-zinc-400 font-bold text-[10px] uppercase truncate">
+                    <Users className="w-3.5 h-3.5 text-primary shrink-0" />
+                    <span className="truncate">
+                      {bet.opponent === '0x0000000000000000000000000000000000000000' ? 'PUBLIC_ARENA' : 'DUAL_COMBAT'}
+                    </span>
+                  </div>
                 </div>
-              </div>
               <div className="space-y-2 text-right">
                 <p className="text-[9px] font-black text-zinc-600 uppercase tracking-widest">Expiration_Date</p>
                 <div className={`flex items-center justify-end gap-2 font-bold text-[10px] ${isExpired ? 'text-accent' : 'text-zinc-400'}`}>

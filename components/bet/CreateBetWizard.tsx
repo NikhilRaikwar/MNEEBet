@@ -13,7 +13,7 @@ import { useAccount, useSimulateContract } from 'wagmi';
 import { MNEEBET_CONTRACT } from '@/lib/contract';
 import { parseUnits, formatUnits } from 'viem';
 import { useRouter } from 'next/navigation';
-import { Coins, Calendar, User, Gavel, FileText, ArrowRight, ArrowLeft, ShieldCheck, Sparkles, Zap, Terminal } from 'lucide-react';
+import { Coins, Calendar, User, Gavel, FileText, ArrowRight, ArrowLeft, ShieldCheck, Sparkles, Zap, Terminal, ShieldAlert } from 'lucide-react';
 import { BetSuccessModal } from './BetSuccessModal';
 import { motion, AnimatePresence } from 'framer-motion';
 
@@ -29,7 +29,7 @@ interface WizardData {
 
 const STEPS = [
   { id: 1, title: 'TARGET', icon: User, desc: 'Identify the opponent' },
-  { id: 2, title: 'ORACLE', icon: Gavel, desc: 'Select the arbiter' },
+  { id: 2, title: 'JUDGE', icon: Gavel, desc: 'Select the arbiter' },
   { id: 3, title: 'CLAUSE', icon: FileText, desc: 'Define contract terms' },
   { id: 4, title: 'STAKE', icon: Coins, desc: 'Commit MNEE assets' },
   { id: 5, title: 'EXPIRY', icon: Calendar, desc: 'Set temporal limit' },
@@ -122,19 +122,9 @@ export function CreateBetWizard() {
 
     // Ensure deadline is in the future (add 60s buffer for block time)
     if (deadlineTimestamp < BigInt(Math.floor(Date.now() / 1000) + 60)) {
-      console.error("Deadline must be in the future");
       alert("Deadline must be in the future");
       return;
     }
-
-    console.log('Finalizing bet creation:', {
-      opponent: data.opponent,
-      amount: data.amount,
-      terms: data.terms,
-      deadline: deadlineTimestamp.toString(),
-      judge: data.judge,
-      decimals: safeDecimals
-    });
 
     createBet({
       opponent: data.opponent,
@@ -206,12 +196,13 @@ export function CreateBetWizard() {
             </div>
 
             <div className="relative z-10 flex-1 flex flex-col space-y-12">
-              <div className="space-y-6">
-                <div className="inline-flex items-center gap-3 px-3 py-1 bg-primary/10 border border-primary/20 text-primary text-[10px] font-black tracking-[0.2em] uppercase">
-                  <Terminal className="w-3.5 h-3.5" />
-                  {STEPS[currentStep - 1].title}_PARAMETER_INIT
-                </div>
-                <h2 className="text-5xl font-black text-white tracking-tighter leading-[0.9] uppercase italic font-display">
+                <div className="space-y-6">
+                  <div className="inline-flex items-center gap-3 px-3 py-1 bg-primary/10 border border-primary/20 text-primary text-[10px] font-black tracking-[0.2em] uppercase">
+                    <ShieldCheck className="w-3.5 h-3.5" />
+                    STEP_0{currentStep} // {STEPS[currentStep - 1].title}
+                  </div>
+                  <h2 className="text-5xl font-black text-white tracking-tighter leading-[0.9] uppercase italic font-display">
+
                   {STEPS[currentStep - 1].desc}
                 </h2>
               </div>
@@ -304,24 +295,35 @@ export function CreateBetWizard() {
                         onChange={(e) => setData({ ...data, deadline: e.target.value })}
                         className="h-24 bg-white/5 border-2 border-white/10 text-2xl font-black text-white rounded-none focus:border-primary uppercase"
                       />
-                      <div className="p-8 border-2 border-white/5 bg-white/[0.02] space-y-6">
-                        <h4 className="text-[10px] font-black uppercase tracking-[0.3em] text-zinc-600">CONTRACT_MANIFEST_SUMMARY</h4>
-                        <div className="space-y-4">
-                          <div className="flex justify-between items-end pb-2 border-b border-white/5">
-                            <span className="text-[10px] font-black text-zinc-500 uppercase">Terms_Clause</span>
-                            <span className="text-sm font-bold text-white truncate max-w-[200px] uppercase italic">{data.terms || 'UNDEFINED'}</span>
-                          </div>
-                          <div className="flex justify-between items-end pb-2 border-b border-white/5">
-                            <span className="text-[10px] font-black text-zinc-500 uppercase">Capital_Stake</span>
-                            <span className="text-2xl font-black text-primary italic tracking-tighter">{data.amount || '0'} MNEE</span>
-                          </div>
-                          <div className="flex justify-between items-end">
-                            <span className="text-[10px] font-black text-zinc-500 uppercase">Arbiter_ID</span>
-                            <span className="text-sm font-bold text-white uppercase tracking-widest">{data.judgeUsername || 'UNSPECIFIED'}</span>
+                        <div className="p-8 border-2 border-white/5 bg-white/[0.02] space-y-6">
+                          <h4 className="text-[10px] font-black uppercase tracking-[0.3em] text-zinc-600">CONTRACT_MANIFEST_SUMMARY</h4>
+                            <div className="space-y-4 overflow-hidden">
+                              <div className="flex justify-between items-start pb-2 border-b border-white/5 gap-4">
+                                <span className="text-[10px] font-black text-zinc-500 uppercase shrink-0">Terms_Clause</span>
+                                <span className="text-sm font-bold text-white uppercase italic break-words text-right">{data.terms || 'UNDEFINED'}</span>
+                              </div>
+                              <div className="flex justify-between items-end pb-2 border-b border-white/5 gap-4">
+                                <span className="text-[10px] font-black text-zinc-500 uppercase shrink-0">Capital_Stake</span>
+                                <span className="text-2xl font-black text-primary italic tracking-tighter shrink-0">{data.amount || '0'} MNEE</span>
+                              </div>
+                              <div className="flex justify-between items-end gap-4">
+                                <span className="text-[10px] font-black text-zinc-500 uppercase shrink-0">Arbiter_ID</span>
+                                <span className="text-sm font-bold text-white uppercase tracking-widest truncate">{data.judgeUsername || 'UNSPECIFIED'}</span>
+                              </div>
+                            </div>
+                        </div>
+
+                        {/* Protocol Security Notice - Only shown at final step */}
+                        <div className="p-6 border-2 border-accent/20 bg-accent/5 flex items-start gap-4">
+                          <ShieldAlert className="w-6 h-6 text-accent flex-shrink-0" />
+                          <div className="space-y-1">
+                            <h4 className="text-[10px] font-black uppercase tracking-[0.2em] text-accent">Protocol_Security_Notice</h4>
+                            <p className="text-[10px] text-zinc-500 font-medium leading-relaxed uppercase tracking-wider">
+                              ALL STAKES ARE LOCKED IN ESCROW. ENSURE THE CHOSEN JUDGE IS TRUSTWORTHY. MNEEBET PROTOCOL CANNOT REVERSE TRANSACTIONS ONCE SETTLED.
+                            </p>
                           </div>
                         </div>
-                      </div>
-                    </motion.div>
+                      </motion.div>
                   )}
                 </AnimatePresence>
               </div>
@@ -372,27 +374,16 @@ export function CreateBetWizard() {
         </div>
 
         {/* Debug Console / Error Display */}
-        {currentStep === 5 && (
-          <div className="lg:col-span-12">
-            {(simulationError || createError) && (
-              <div className="p-4 border-2 border-red-500/20 bg-red-500/5 text-red-400 font-mono text-xs break-all">
-                <p className="font-bold mb-2">ERROR_LOG:</p>
-                {simulationError?.message || createError?.message}
-              </div>
-            )}
-
-            {/* Account Debug Info */}
-            <div className="mt-4 p-4 border border-white/5 bg-black/40 text-zinc-500 font-mono text-[10px]">
-              <p>DEBUG_STATE:</p>
-              <p>Active Account: {address}</p>
-              <p>Opponent: {data.opponent}</p>
-              <p>Judge: {data.judge}</p>
-              <p>Allowance: {allowance ? formatUnits(allowance, safeDecimals) : 'Loading...'}</p>
-              <p>Balance: {balanceDisplay}</p>
-              <p>Required: {data.amount}</p>
+          {currentStep === 5 && (
+            <div className="lg:col-span-12">
+              {(simulationError || createError) && (
+                <div className="p-4 border-2 border-red-500/20 bg-red-500/5 text-red-400 font-mono text-xs break-all">
+                  <p className="font-bold mb-2">ERROR_LOG:</p>
+                  {simulationError?.message || createError?.message}
+                </div>
+              )}
             </div>
-          </div>
-        )}
+          )}
       </div>
 
       <BetSuccessModal

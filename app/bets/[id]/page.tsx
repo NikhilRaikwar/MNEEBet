@@ -121,9 +121,8 @@ export default function BetDetailsPage() {
         >
           <BetDetailsWannabet bet={bet} onUpdate={handleUpdate} />
         </motion.div>
-      </main>
+        </main>
+      </div>
+    );
+  }
 
-      <Footer />
-    </div>
-  );
-}

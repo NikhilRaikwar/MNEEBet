@@ -165,9 +165,9 @@ export default function MyBetsPage() {
             </TabsContent>
           </Tabs>
         </div>
-      </main>
-      <Footer />
-      <BottomNav />
-    </div>
-  );
-}
+        </main>
+        <BottomNav />
+      </div>
+    );
+  }
+
