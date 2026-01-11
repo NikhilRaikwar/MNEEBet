@@ -1,0 +1,8 @@
+{
+  "network": "sepolia",
+  "contractAddress": "0x781A50f8dC5c541C7629Ae69Ed73c3aD39d39743",
+  "mneeTokenAddress": "0x8ccedbAe4916b79da7F3F612EfB2EB93A2bFD6cF",
+  "deployerAddress": "0x70B2D7dBEcC2238e0d2A3159320E11D7D85dEDe8",
+  "deployedAt": "2026-01-11T12:18:49.204Z",
+  "blockNumber": 10021737
+}
