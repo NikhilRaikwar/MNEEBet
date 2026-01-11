@@ -67,7 +67,7 @@ export default function LandingPage() {
                       <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-primary opacity-75"></span>
                       <span className="relative inline-flex rounded-full h-2 w-2 bg-primary"></span>
                     </span>
-                    PROTOCOL_STATUS: OPERATIONAL
+                    MNEE: The Stablecoin Built for Trust
                   </motion.div>
   
                   <motion.h1 variants={itemVariants} className="text-4xl sm:text-6xl md:text-[110px] font-black tracking-tighter text-white font-display leading-[0.8] uppercase">
@@ -77,7 +77,7 @@ export default function LandingPage() {
                   </motion.h1>
     
                   <motion.p variants={itemVariants} className="text-lg md:text-2xl text-zinc-400 max-w-3xl mx-auto font-sans leading-relaxed border-y-2 border-primary/20 py-8 italic">
-                    The ultimate non-custodial wagering engine. No house, no limits, just pure cryptographic settlement.
+                   Stake MNEE. Trust math, not intermediaries. <br /> Judge-resolved settlements on ETH.
                   </motion.p>
     
                   <motion.div variants={itemVariants} className="flex flex-col sm:flex-row items-center justify-center gap-6 pt-6">
