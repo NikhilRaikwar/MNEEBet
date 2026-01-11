@@ -1,5 +1,6 @@
 import type { Metadata } from "next";
 import { Syne, Outfit, JetBrains_Mono } from "next/font/google";
+import { Analytics } from "@vercel/analytics/next";
 import "./globals.css";
 import { Providers } from "./providers";
 
@@ -37,6 +38,7 @@ export default function RootLayout({
         className={`${syne.variable} ${outfit.variable} ${jetbrainsMono.variable} font-sans antialiased bg-[#050505] text-[#e0e0e0] selection:bg-[#ccff00] selection:text-black`}
       >
         <Providers>{children}</Providers>
+        <Analytics />
       </body>
     </html>
   );
