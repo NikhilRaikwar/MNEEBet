@@ -80,126 +80,126 @@ export function BetDetailsWannabet({ bet, onUpdate }: BetDetailsWannabetProps) {
             </div>
           </div>
 
-          <h1 className="text-4xl md:text-7xl font-black text-white tracking-tighter leading-[0.9] max-w-5xl uppercase font-display italic">
-            {bet.terms}
-          </h1>
+            <h1 className="text-2xl sm:text-4xl md:text-7xl font-black text-white tracking-tighter leading-[0.9] max-w-5xl uppercase font-display italic break-words">
+              {bet.terms}
+            </h1>
 
-          <div className="grid grid-cols-1 md:grid-cols-3 gap-8 pt-10 border-t border-white/5">
-            <div className="space-y-2">
-              <p className="text-[10px] font-black text-zinc-600 uppercase tracking-widest">Stake_Capital</p>
-              <div className="flex items-center gap-3">
-                <div className="p-2.5 bg-primary border-2 border-black rotate-3">
-                  <Coins className="w-6 h-6 text-black" />
+            <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-8 pt-10 border-t border-white/5">
+              <div className="space-y-2">
+                <p className="text-[10px] font-black text-zinc-600 uppercase tracking-widest">Stake_Capital</p>
+                <div className="flex items-center gap-3">
+                  <div className="p-2 bg-primary border-2 border-black rotate-3">
+                    <Coins className="w-5 h-5 sm:w-6 sm:h-6 text-black" />
+                  </div>
+                  <p className="text-2xl sm:text-3xl font-black text-white italic tracking-tighter">
+                    {formatBetAmount(bet.amount)} <span className="text-xs text-zinc-600 not-italic">MNEE</span>
+                  </p>
                 </div>
-                <p className="text-3xl font-black text-white italic tracking-tighter">
-                  {formatBetAmount(bet.amount)} <span className="text-xs text-zinc-600 not-italic">MNEE</span>
-                </p>
               </div>
-            </div>
 
-            <div className="space-y-2">
-              <p className="text-[10px] font-black text-zinc-600 uppercase tracking-widest">Expiration_Target</p>
-              <div className="flex items-center gap-3">
-                <div className="p-2.5 bg-white border-2 border-black -rotate-3">
-                  <Calendar className="w-6 h-6 text-black" />
+              <div className="space-y-2">
+                <p className="text-[10px] font-black text-zinc-600 uppercase tracking-widest">Expiration_Target</p>
+                <div className="flex items-center gap-3">
+                  <div className="p-2 bg-white border-2 border-black -rotate-3">
+                    <Calendar className="w-5 h-5 sm:w-6 sm:h-6 text-black" />
+                  </div>
+                  <p className="text-xl sm:text-2xl font-black text-white italic tracking-tighter">{formatDate(bet.deadline)}</p>
                 </div>
-                <p className="text-2xl font-black text-white italic tracking-tighter">{formatDate(bet.deadline)}</p>
               </div>
-            </div>
 
-            <div className="space-y-2">
-              <p className="text-[10px] font-black text-zinc-600 uppercase tracking-widest">Arbiter_Entity</p>
-              <div className="flex items-center gap-3">
-                <div className="p-2.5 bg-accent border-2 border-black rotate-6">
-                  <Gavel className="w-6 h-6 text-black" />
+              <div className="space-y-2 sm:col-span-2 md:col-span-1">
+                <p className="text-[10px] font-black text-zinc-600 uppercase tracking-widest">Arbiter_Entity</p>
+                <div className="flex items-center gap-3">
+                  <div className="p-2 bg-accent border-2 border-black rotate-6">
+                    <Gavel className="w-5 h-5 sm:w-6 sm:h-6 text-black" />
+                  </div>
+                  <p className="text-sm font-bold text-white uppercase tracking-widest truncate">{judgeUsername || 'UNRESOLVED_ORACLE'}</p>
                 </div>
-                <p className="text-sm font-bold text-white uppercase tracking-widest truncate">{judgeUsername || 'UNRESOLVED_ORACLE'}</p>
               </div>
             </div>
           </div>
-        </div>
-      </motion.div>
+        </motion.div>
 
-      <div className="grid grid-cols-1 lg:grid-cols-12 gap-12">
-        {/* Main Confrontation Arena */}
-        <div className="lg:col-span-8 space-y-12">
-          <div className="brutalist-card p-10 md:p-16 border-2 border-white/10 bg-black/40 backdrop-blur-xl relative">
-            <div className="absolute top-6 left-1/2 -translate-x-1/2 text-[10px] font-black text-zinc-800 uppercase tracking-[0.4em] select-none">
-              COMBAT_VECTORS
-            </div>
+        <div className="grid grid-cols-1 lg:grid-cols-12 gap-12">
+          {/* Main Confrontation Arena */}
+          <div className="lg:col-span-8 space-y-12">
+            <div className="brutalist-card p-8 md:p-16 border-2 border-white/10 bg-black/40 backdrop-blur-xl relative">
+              <div className="absolute top-6 left-1/2 -translate-x-1/2 text-[10px] font-black text-zinc-800 uppercase tracking-[0.4em] select-none">
+                COMBAT_VECTORS
+              </div>
 
-            <div className="flex flex-col md:flex-row items-center justify-between gap-16 py-8">
-              {/* Creator Entity */}
-              <div className="flex flex-col items-center gap-8 group flex-1">
-                <div className="relative">
-                  <div className="absolute inset-[-4px] bg-primary border-2 border-black -z-10 rotate-6 group-hover:rotate-0 transition-transform" />
-                  <Avatar className="w-40 h-40 rounded-none border-2 border-black">
-                    <AvatarImage src={`https://api.dicebear.com/7.x/pixel-art/svg?seed=${bet.creator}`} />
-                    <AvatarFallback className="bg-zinc-900 font-display text-4xl">C</AvatarFallback>
-                  </Avatar>
-                  {bet.status === BetStatus.Resolved && bet.winner === 1 && (
-                    <motion.div
-                      initial={{ scale: 0 }}
-                      animate={{ scale: 1 }}
-                      className="absolute -top-4 -right-4 w-12 h-12 bg-primary border-2 border-black flex items-center justify-center shadow-[4px_4px_0px_0px_rgba(255,255,255,1)]"
-                    >
-                      <Trophy className="text-black w-6 h-6" />
-                    </motion.div>
+              <div className="flex flex-col md:flex-row items-center justify-between gap-12 md:gap-16 py-8">
+                {/* Creator Entity */}
+                <div className="flex flex-col items-center gap-6 md:gap-8 group flex-1 w-full">
+                  <div className="relative">
+                    <div className="absolute inset-[-4px] bg-primary border-2 border-black -z-10 rotate-6 group-hover:rotate-0 transition-transform" />
+                    <Avatar className="w-32 h-32 md:w-40 md:h-40 rounded-none border-2 border-black">
+                      <AvatarImage src={`https://api.dicebear.com/7.x/pixel-art/svg?seed=${bet.creator}`} />
+                      <AvatarFallback className="bg-zinc-900 font-display text-4xl">C</AvatarFallback>
+                    </Avatar>
+                    {bet.status === BetStatus.Resolved && bet.winner === 1 && (
+                      <motion.div
+                        initial={{ scale: 0 }}
+                        animate={{ scale: 1 }}
+                        className="absolute -top-4 -right-4 w-10 h-10 md:w-12 md:h-12 bg-primary border-2 border-black flex items-center justify-center shadow-[4px_4px_0px_0px_rgba(255,255,255,1)]"
+                      >
+                        <Trophy className="text-black w-5 h-5 md:w-6 md:h-6" />
+                      </motion.div>
+                    )}
+                  </div>
+                  <div className="text-center space-y-2">
+                    <p className="text-[10px] font-black text-primary uppercase tracking-[0.3em] italic">INITIATOR</p>
+                    <UsernameDisplay address={bet.creator as `0x${string}`} showAvatar={false} className="text-xl md:text-2xl font-black text-white uppercase tracking-tighter" />
+                  </div>
+                </div>
+
+                <div className="flex flex-row md:flex-col items-center gap-6">
+                  <div className="relative">
+                    <Swords className="w-12 h-12 md:w-16 md:h-16 text-zinc-800 animate-pulse" />
+                    <div className="absolute inset-0 blur-xl bg-primary/10 -z-10" />
+                  </div>
+                  <div className="w-12 h-[2px] md:w-[2px] md:h-24 bg-gradient-to-r md:bg-gradient-to-b from-transparent via-white/10 to-transparent" />
+                </div>
+
+                {/* Opponent Entity */}
+                <div className="flex flex-col items-center gap-6 md:gap-8 group flex-1 w-full">
+                  {isOpenBet ? (
+                    <div className="flex flex-col items-center gap-6 md:gap-8 opacity-20 group-hover:opacity-40 transition-opacity">
+                      <div className="w-32 h-32 md:w-40 md:h-40 border-4 border-dashed border-white/10 flex items-center justify-center rotate-[-6deg]">
+                        <User className="w-12 h-12 md:w-16 md:h-16 text-zinc-700" />
+                      </div>
+                      <div className="text-center space-y-2">
+                        <p className="text-[10px] font-black text-zinc-600 uppercase tracking-[0.3em] italic">TAKER</p>
+                        <p className="text-xl md:text-2xl font-black text-zinc-600 uppercase tracking-tighter">WAITING...</p>
+                      </div>
+                    </div>
+                  ) : (
+                    <div className="flex flex-col items-center gap-6 md:gap-8 group w-full">
+                      <div className="relative">
+                        <div className="absolute inset-[-4px] bg-secondary border-2 border-black -z-10 rotate-[-6deg] group-hover:rotate-0 transition-transform" />
+                        <Avatar className="w-32 h-32 md:w-40 md:h-40 rounded-none border-2 border-black">
+                          <AvatarImage src={`https://api.dicebear.com/7.x/pixel-art/svg?seed=${bet.opponent}`} />
+                          <AvatarFallback className="bg-zinc-900 font-display text-4xl">O</AvatarFallback>
+                        </Avatar>
+                        {bet.status === BetStatus.Resolved && bet.winner === 2 && (
+                          <motion.div
+                            initial={{ scale: 0 }}
+                            animate={{ scale: 1 }}
+                            className="absolute -top-4 -right-4 w-10 h-10 md:w-12 md:h-12 bg-secondary border-2 border-black flex items-center justify-center shadow-[4px_4px_0px_0px_rgba(255,255,255,1)]"
+                          >
+                            <Trophy className="text-black w-5 h-5 md:w-6 md:h-6" />
+                          </motion.div>
+                        )}
+                      </div>
+                      <div className="text-center space-y-2">
+                        <p className="text-[10px] font-black text-secondary uppercase tracking-[0.3em] italic">OPPONENT</p>
+                        <UsernameDisplay address={bet.opponent as `0x${string}`} showAvatar={false} className="text-xl md:text-2xl font-black text-white uppercase tracking-tighter" />
+                      </div>
+                    </div>
                   )}
                 </div>
-                <div className="text-center space-y-2">
-                  <p className="text-[10px] font-black text-primary uppercase tracking-[0.3em] italic">INITIATOR</p>
-                  <UsernameDisplay address={bet.creator as `0x${string}`} showAvatar={false} className="text-2xl font-black text-white uppercase tracking-tighter" />
-                </div>
-              </div>
-
-              <div className="flex flex-col items-center gap-6">
-                <div className="relative">
-                  <Swords className="w-16 h-16 text-zinc-800 animate-pulse" />
-                  <div className="absolute inset-0 blur-xl bg-primary/10 -z-10" />
-                </div>
-                <div className="h-24 w-[2px] bg-gradient-to-b from-transparent via-white/10 to-transparent" />
-              </div>
-
-              {/* Opponent Entity */}
-              <div className="flex flex-col items-center gap-8 group flex-1">
-                {isOpenBet ? (
-                  <div className="flex flex-col items-center gap-8 opacity-20 group-hover:opacity-40 transition-opacity">
-                    <div className="w-40 h-40 border-4 border-dashed border-white/10 flex items-center justify-center rotate-[-6deg]">
-                      <User className="w-16 h-16 text-zinc-700" />
-                    </div>
-                    <div className="text-center space-y-2">
-                      <p className="text-[10px] font-black text-zinc-600 uppercase tracking-[0.3em] italic">TAKER</p>
-                      <p className="text-2xl font-black text-zinc-600 uppercase tracking-tighter">WAITING...</p>
-                    </div>
-                  </div>
-                ) : (
-                  <div className="flex flex-col items-center gap-8 group">
-                    <div className="relative">
-                      <div className="absolute inset-[-4px] bg-secondary border-2 border-black -z-10 rotate-[-6deg] group-hover:rotate-0 transition-transform" />
-                      <Avatar className="w-40 h-40 rounded-none border-2 border-black">
-                        <AvatarImage src={`https://api.dicebear.com/7.x/pixel-art/svg?seed=${bet.opponent}`} />
-                        <AvatarFallback className="bg-zinc-900 font-display text-4xl">O</AvatarFallback>
-                      </Avatar>
-                      {bet.status === BetStatus.Resolved && bet.winner === 2 && (
-                        <motion.div
-                          initial={{ scale: 0 }}
-                          animate={{ scale: 1 }}
-                          className="absolute -top-4 -right-4 w-12 h-12 bg-secondary border-2 border-black flex items-center justify-center shadow-[4px_4px_0px_0px_rgba(255,255,255,1)]"
-                        >
-                          <Trophy className="text-black w-6 h-6" />
-                        </motion.div>
-                      )}
-                    </div>
-                    <div className="text-center space-y-2">
-                      <p className="text-[10px] font-black text-secondary uppercase tracking-[0.3em] italic">OPPONENT</p>
-                      <UsernameDisplay address={bet.opponent as `0x${string}`} showAvatar={false} className="text-2xl font-black text-white uppercase tracking-tighter" />
-                    </div>
-                  </div>
-                )}
               </div>
             </div>
-          </div>
 
           <div className="brutalist-card p-12 border-2 border-white/10 bg-white/5 backdrop-blur-md">
             <h3 className="text-xl font-black text-white mb-10 uppercase tracking-tighter flex items-center gap-3">

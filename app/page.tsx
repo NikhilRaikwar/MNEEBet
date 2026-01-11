@@ -4,11 +4,14 @@ import { useEffect } from 'react';
 import { useRouter } from 'next/navigation';
 import { useAccount } from 'wagmi';
 import { ConnectButton } from '@rainbow-me/rainbowkit';
-import { motion, AnimatePresence } from 'framer-motion';
+import { motion } from 'framer-motion';
 import { useUsername } from '@/hooks/useUsername';
 import { Button } from '@/components/ui/button';
-import { Trophy, ArrowRight, Shield, Zap, Globe, Github, Terminal, Activity, Lock } from 'lucide-react';
+import { Trophy, ArrowRight, Shield, Zap, Globe, Github, Terminal, Activity, Lock, Twitter, ExternalLink, UserCheck, Edit3, ShoppingBag } from 'lucide-react';
 import Link from 'next/link';
+
+import { Header } from '@/components/layout/Header';
+import { Footer } from '@/components/layout/Footer';
 
 export default function LandingPage() {
   const { isConnected, address } = useAccount();
@@ -42,164 +45,219 @@ export default function LandingPage() {
   };
 
   return (
-    <div className="relative min-h-screen bg-background overflow-hidden grid-pattern">
+    <div className="relative min-h-screen bg-[#050505] grid-pattern overflow-x-hidden">
       <div className="noise-overlay" />
       <div className="scanline" />
 
-      {/* Navigation */}
-      <nav className="fixed top-0 w-full z-50 border-b border-white/5 bg-background/80 backdrop-blur-md">
-        <div className="container mx-auto px-6 h-16 flex items-center justify-between">
-          <div className="flex items-center gap-3">
-            <div className="w-8 h-8 bg-primary flex items-center justify-center rotate-3 border-2 border-black">
-              <Trophy className="text-black w-5 h-5" />
-            </div>
-            <span className="text-xl font-black tracking-tight text-white font-display">
-              MNEE<span className="text-primary">BET</span>
-            </span>
-          </div>
-          <div className="hidden md:flex items-center gap-8">
-            <Link href="#features" className="text-xs font-bold uppercase tracking-widest text-zinc-500 hover:text-primary transition-colors">Protocol</Link>
-            <Link href="#" className="text-xs font-bold uppercase tracking-widest text-zinc-500 hover:text-primary transition-colors">Manifesto</Link>
-            <div className="h-4 w-[1px] bg-white/10" />
-            <ConnectButton showBalance={false} chainStatus="none" accountStatus="avatar" />
-          </div>
-        </div>
-      </nav>
+      <Header />
 
-      <main className="container mx-auto px-6 pt-32 pb-20 relative z-10">
-        <motion.div
-          variants={containerVariants}
-          initial="hidden"
-          animate="visible"
-          className="max-w-6xl mx-auto"
-        >
-          <div className="grid grid-cols-1 lg:grid-cols-12 gap-12 items-start">
-
-            {/* Left Content */}
-            <div className="lg:col-span-7 space-y-8">
-              <motion.div variants={itemVariants} className="inline-flex items-center gap-2 px-3 py-1 bg-primary/10 border border-primary/20 text-primary text-[10px] font-black tracking-[0.2em] uppercase">
-                <span className="relative flex h-2 w-2">
-                  <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-primary opacity-75"></span>
-                  <span className="relative inline-flex rounded-full h-2 w-2 bg-primary"></span>
-                </span>
-                PROTOCOL_STATUS: OPERATIONAL
-              </motion.div>
-
-              <motion.h1 variants={itemVariants} className="text-7xl md:text-[120px] font-black tracking-tighter text-white font-display leading-[0.85] uppercase">
-                THE <br />
-                <span className="text-primary text-glow-lime italic">ARENA</span> <br />
-                IS OPEN
-              </motion.h1>
-
-              <motion.p variants={itemVariants} className="text-lg md:text-xl text-zinc-400 max-w-xl font-sans leading-relaxed border-l-4 border-primary/30 pl-6">
-                Direct peer-to-peer betting. No intermediaries. No limits. Verified by smart contracts. Settled in MNEE stablecoin.
-              </motion.p>
-
-              <motion.div variants={itemVariants} className="flex flex-col sm:flex-row items-center gap-4 pt-4">
-                <Button
-                  onClick={() => { }}
-                  className="h-14 px-8 text-sm font-black uppercase tracking-widest bg-primary text-black hover:bg-primary/90 rounded-none border-2 border-black shadow-[4px_4px_0px_0px_rgba(255,255,255,1)] active:shadow-none active:translate-x-1 active:translate-y-1 transition-all"
-                >
-                  INITIALIZE CONNECTION
-                  <ArrowRight className="ml-2 w-4 h-4" />
-                </Button>
-                <div className="text-[10px] font-mono text-zinc-500 uppercase tracking-widest">
-                  Requires WalletConnect compatible provider
+      <main className="relative z-10 pt-12 pb-20">
+        {/* Hero Section */}
+        <section className="container mx-auto px-6 mb-32">
+          <motion.div
+            variants={containerVariants}
+            initial="hidden"
+            animate="visible"
+            className="max-w-7xl mx-auto"
+          >
+            <div className="grid grid-cols-1 lg:grid-cols-12 gap-16 items-center">
+                <div className="lg:col-span-12 text-center space-y-10">
+                  <motion.div variants={itemVariants} className="inline-flex items-center gap-2 px-4 py-1.5 bg-primary/10 border-2 border-primary/20 text-primary text-[10px] font-black tracking-[0.3em] uppercase italic">
+                    <span className="relative flex h-2 w-2">
+                      <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-primary opacity-75"></span>
+                      <span className="relative inline-flex rounded-full h-2 w-2 bg-primary"></span>
+                    </span>
+                    PROTOCOL_STATUS: OPERATIONAL
+                  </motion.div>
+  
+                  <motion.h1 variants={itemVariants} className="text-4xl sm:text-6xl md:text-[110px] font-black tracking-tighter text-white font-display leading-[0.8] uppercase">
+                    Peer-to-peer betting <br />
+                    with <span className="text-primary text-glow-lime italic">MNEE</span> <br />
+                    stablecoin
+                  </motion.h1>
+    
+                  <motion.p variants={itemVariants} className="text-lg md:text-2xl text-zinc-400 max-w-3xl mx-auto font-sans leading-relaxed border-y-2 border-primary/20 py-8 italic">
+                    The ultimate non-custodial wagering engine. No house, no limits, just pure cryptographic settlement.
+                  </motion.p>
+    
+                  <motion.div variants={itemVariants} className="flex flex-col sm:flex-row items-center justify-center gap-6 pt-6">
+                    {!isConnected ? (
+                      <ConnectButton.Custom>
+                        {({ openConnectModal, connectModalOpen }) => (
+                          <Button
+                            onClick={openConnectModal}
+                            disabled={connectModalOpen}
+                            className="w-full sm:w-auto h-20 px-8 sm:px-12 text-sm sm:text-base font-black uppercase tracking-[0.2em] bg-primary text-black hover:bg-primary/90 rounded-none border-2 border-black shadow-[8px_8px_0px_0px_rgba(163,251,46,0.3)] hover:shadow-[12px_12px_0px_0px_rgba(163,251,46,0.5)] active:shadow-none active:translate-x-2 active:translate-y-2 transition-all group"
+                          >
+                            INITIALIZE_WALLET
+                            <ArrowRight className="ml-4 w-6 h-6 group-hover:translate-x-2 transition-transform" />
+                          </Button>
+                        )}
+                      </ConnectButton.Custom>
+                    ) : (
+                      <Button
+                        asChild
+                        className="w-full sm:w-auto h-20 px-8 sm:px-12 text-sm sm:text-base font-black uppercase tracking-[0.2em] bg-primary text-black hover:bg-primary/90 rounded-none border-2 border-black shadow-[8px_8px_0px_0px_rgba(163,251,46,0.3)] hover:shadow-[12px_12px_0px_0px_rgba(163,251,46,0.5)] active:shadow-none active:translate-x-2 active:translate-y-2 transition-all group"
+                      >
+                        <Link href="/create">
+                          CREATE_BET
+                          <ArrowRight className="ml-4 w-6 h-6 group-hover:translate-x-2 transition-transform" />
+                        </Link>
+                      </Button>
+                    )}
+                    <div className="text-[10px] font-mono text-zinc-600 uppercase tracking-[0.2em] max-w-[200px] leading-tight text-left">
+                      ESTABLISHING SECURE P2P CHANNEL VIA WALLETCONNECT_V2
+                    </div>
+                  </motion.div>
                 </div>
-              </motion.div>
             </div>
+          </motion.div>
+        </section>
 
-            {/* Right Status Panel */}
-            <div className="lg:col-span-5">
+        {/* Project Flow / Features Section */}
+        <section id="features" className="container mx-auto px-6 mb-40">
+          <div className="text-center mb-20 space-y-4">
+            <h2 className="text-[10px] font-black text-primary uppercase tracking-[0.5em]">PROTOCOL_WORKFLOW</h2>
+            <h3 className="text-5xl md:text-6xl font-black text-white tracking-tighter uppercase italic">HOW IT WORKS</h3>
+          </div>
+          
+          <div className="grid grid-cols-1 md:grid-cols-3 gap-0 border-2 border-white/10 divide-y-2 md:divide-y-0 md:divide-x-2 divide-white/10 bg-black/20">
+            {[
+              { 
+                step: "01", 
+                title: 'Claim Identity', 
+                desc: 'Secure your unique on-chain username to build your reputation in the arena.', 
+                icon: UserCheck 
+              },
+              { 
+                step: "02", 
+                title: 'Create Bet', 
+                desc: 'Define your terms, set stakes in MNEE, and select a trusted judge to oversee the wager.', 
+                icon: Edit3 
+              },
+              { 
+                step: "03", 
+                title: 'Bets Market', 
+                desc: 'Browse active wagers, accept challenges from other users, and prove your foresight.', 
+                icon: ShoppingBag 
+              }
+            ].map((feature, i) => (
               <motion.div
-                variants={itemVariants}
-                className="brutalist-card p-8 border-2 border-white/10 bg-black/40 backdrop-blur-xl space-y-6"
+                key={i}
+                initial={{ opacity: 0, y: 20 }}
+                whileInView={{ opacity: 1, y: 0 }}
+                viewport={{ once: true }}
+                transition={{ delay: i * 0.1 }}
+                className="p-12 hover:bg-white/[0.03] transition-all group relative overflow-hidden"
               >
-                <div className="flex items-center justify-between border-b border-white/10 pb-4">
-                  <div className="flex items-center gap-2">
-                    <Terminal className="w-4 h-4 text-primary" />
-                    <span className="text-xs font-mono font-bold text-white uppercase tracking-widest">System_Logs</span>
-                  </div>
-                  <div className="flex gap-1">
-                    <div className="w-2 h-2 rounded-full bg-red-500/50" />
-                    <div className="w-2 h-2 rounded-full bg-yellow-500/50" />
-                    <div className="w-2 h-2 rounded-full bg-green-500/50" />
-                  </div>
+                <div className="absolute top-0 right-0 p-6 text-6xl font-black text-white/5 italic select-none group-hover:text-primary/10 transition-colors">
+                  {feature.step}
                 </div>
+                <feature.icon className="w-12 h-12 text-primary mb-8 group-hover:scale-110 group-hover:rotate-6 transition-transform" />
+                <h3 className="text-2xl font-black text-white mb-4 tracking-tighter uppercase">{feature.title}</h3>
+                <p className="text-zinc-500 text-sm leading-relaxed font-medium">{feature.desc}</p>
+              </motion.div>
+            ))}
+          </div>
+        </section>
 
-                <div className="font-mono text-[11px] space-y-3">
-                  <div className="flex gap-4">
-                    <span className="text-zinc-600">[08:42:01]</span>
-                    <span className="text-zinc-300 italic">Connecting to MNEEBet_V2...</span>
+        {/* Token Information Section */}
+        <section className="bg-primary/5 border-y-2 border-primary/20 py-32 mb-40 relative overflow-hidden">
+          <div className="absolute top-0 left-0 w-full h-1 bg-gradient-to-r from-transparent via-primary/50 to-transparent" />
+          <div className="container mx-auto px-6 max-w-6xl">
+            <div className="grid grid-cols-1 lg:grid-cols-2 gap-20 items-center">
+              <div className="space-y-8">
+                <div className="w-24 h-24 bg-primary flex items-center justify-center border-4 border-black rotate-12 shadow-[8px_8px_0px_0px_rgba(0,0,0,1)]">
+                  <Zap className="w-12 h-12 text-black" />
+                </div>
+                <h2 className="text-6xl font-black text-white tracking-tighter uppercase leading-none italic">
+                  POWERED BY <br />
+                  <span className="text-primary text-glow-lime">MNEE STABLECOIN</span>
+                </h2>
+                <p className="text-xl text-zinc-400 font-medium leading-relaxed italic">
+                  "USD-backed stablecoin, $1.00 price, No volatility." <br />
+                  Settle your bets with confidence using institutional-grade stable value.
+                </p>
+                <div className="flex gap-4">
+                   <Button variant="outline" className="h-12 border-2 border-white/10 rounded-none font-black uppercase text-[10px] tracking-widest hover:border-primary hover:text-primary" asChild>
+                     <Link href="https://etherscan.io/token/0x8ccedbAe4916b79da7F3F612EfB2EB93A2bFD6cF" target="_blank">
+                       VIEW ON MAINNET <ExternalLink className="ml-2 w-3 h-3" />
+                     </Link>
+                   </Button>
+                </div>
+              </div>
+
+              <div className="grid grid-cols-1 gap-6">
+                <div className="p-8 border-2 border-white/10 bg-black/80 backdrop-blur-xl space-y-6 group hover:border-primary/50 transition-colors">
+                  <div className="flex justify-between items-center">
+                    <span className="text-[10px] font-black text-zinc-500 uppercase tracking-widest">Mainnet_Asset</span>
+                    <span className="px-2 py-0.5 bg-green-500/10 text-green-500 text-[8px] font-black uppercase border border-green-500/20">Live</span>
                   </div>
-                  <div className="flex gap-4 text-primary">
-                    <span className="text-zinc-600">[08:42:02]</span>
-                    <span>SUCCESS: Contract 0x3480...7a81 found.</span>
-                  </div>
-                  <div className="flex gap-4">
-                    <span className="text-zinc-600">[08:42:05]</span>
-                    <span className="text-zinc-300 italic">Awaiting user identity check...</span>
-                  </div>
-                  <div className="pt-4 border-t border-white/5">
-                    <div className="text-zinc-500 mb-2 uppercase text-[9px] tracking-widest font-black">Active Stats</div>
-                    <div className="grid grid-cols-2 gap-4">
-                      <div className="p-3 bg-white/5 border border-white/5">
-                        <div className="text-[9px] text-zinc-500 uppercase">Total_Volume</div>
-                        <div className="text-lg font-black text-white">$4.2M+</div>
-                      </div>
-                      <div className="p-3 bg-white/5 border border-white/5">
-                        <div className="text-[9px] text-zinc-500 uppercase">Live_Bets</div>
-                        <div className="text-lg font-black text-primary">1,204</div>
-                      </div>
+                  <div className="space-y-2">
+                    <div className="text-[10px] font-mono text-zinc-600">TOKEN_ADDRESS:</div>
+                    <div className="text-sm font-mono text-white break-all bg-white/5 p-4 border border-white/5">
+                      0x8ccedbAe4916b79da7F3F612EfB2EB93A2bFD6cF
                     </div>
                   </div>
                 </div>
-              </motion.div>
+
+                <div className="p-8 border-2 border-white/10 bg-black/80 backdrop-blur-xl space-y-6 group hover:border-primary/50 transition-colors">
+                  <div className="flex justify-between items-center">
+                    <span className="text-[10px] font-black text-zinc-500 uppercase tracking-widest">Sepolia_Mock_Asset</span>
+                    <span className="px-2 py-0.5 bg-blue-500/10 text-blue-500 text-[8px] font-black uppercase border border-blue-500/20">Testnet</span>
+                  </div>
+                  <div className="space-y-2">
+                    <div className="text-[10px] font-mono text-zinc-600">TOKEN_ADDRESS:</div>
+                    <div className="text-sm font-mono text-white break-all bg-white/5 p-4 border border-white/5">
+                      0xb8B51876429980d20ed20796B1C4294f1Fc75145
+                    </div>
+                  </div>
+                  <Link 
+                    href="https://sepolia.etherscan.io/token/0xb8b51876429980d20ed20796b1c4294f1fc75145" 
+                    target="_blank"
+                    className="inline-flex items-center text-[10px] font-black text-primary hover:underline uppercase tracking-widest"
+                  >
+                    View on Sepolia Etherscan <ExternalLink className="ml-1.5 w-3 h-3" />
+                  </Link>
+                </div>
+              </div>
             </div>
           </div>
+        </section>
 
-          {/* Features Horizontal */}
-          <section id="features" className="mt-40 border-t-2 border-white/10">
-            <div className="grid grid-cols-1 md:grid-cols-3 divide-y-2 md:divide-y-0 md:divide-x-2 divide-white/10">
-              {[
-                { title: 'NON-CUSTODIAL', desc: 'Immutable smart contracts govern every wager. You are the bank.', icon: Lock },
-                { title: 'STABLE SETTLEMENT', desc: 'Powered by MNEE. No volatility risks. What you win is what you get.', icon: Activity },
-                { title: 'PEER-TO-PEER', desc: 'No bookmakers. No house edge. Just pure logic vs logic.', icon: Globe }
-              ].map((feature, i) => (
-                <motion.div
-                  key={i}
-                  initial={{ opacity: 0 }}
-                  whileInView={{ opacity: 1 }}
-                  viewport={{ once: true }}
-                  transition={{ delay: i * 0.1 }}
-                  className="p-10 hover:bg-white/[0.02] transition-colors group"
-                >
-                  <feature.icon className="w-8 h-8 text-primary mb-6 group-hover:scale-110 transition-transform" />
-                  <h3 className="text-xl font-black text-white mb-4 tracking-tighter">{feature.title}</h3>
-                  <p className="text-zinc-500 text-sm leading-relaxed font-medium">{feature.desc}</p>
-                </motion.div>
-              ))}
+        {/* Contract Info Banner */}
+        <section className="container mx-auto px-6 mb-40">
+          <div className="p-1 border-2 border-primary/30 bg-black overflow-hidden relative group">
+            <div className="absolute inset-0 bg-primary/5 animate-pulse" />
+            <div className="relative p-8 md:p-12 flex flex-col md:flex-row items-center justify-between gap-8 z-10">
+              <div className="flex items-center gap-8">
+                <div className="hidden md:flex p-4 border-2 border-primary/50 text-primary">
+                  <Shield className="w-8 h-8" />
+                </div>
+                <div className="space-y-2">
+                  <div className="flex items-center gap-3">
+                    <span className="text-[10px] font-black text-primary uppercase tracking-[0.4em]">CURRENT_DEPLOYMENT</span>
+                    <span className="h-[1px] w-12 bg-primary/30" />
+                  </div>
+                  <h4 className="text-2xl font-black text-white uppercase tracking-tight">Sepolia Testnet Protocol</h4>
+                  <p className="text-zinc-500 font-mono text-[11px] break-all">ADDR: 0x3480874a63D459046993915b52e612ee69947a81</p>
+                </div>
+              </div>
+              <Button variant="outline" className="w-full md:w-auto h-14 border-2 border-white/10 rounded-none bg-white text-black hover:bg-zinc-200 transition-all font-black uppercase text-xs tracking-[0.2em]" asChild>
+                <Link href="https://sepolia.etherscan.io/address/0x3480874a63D459046993915b52e612ee69947a81" target="_blank">
+                  VIEW_PROTOCOL_ON_ETHERSCAN
+                </Link>
+              </Button>
             </div>
-          </section>
-        </motion.div>
+          </div>
+        </section>
       </main>
 
-      {/* Background Decor */}
-      <div className="fixed bottom-[-100px] left-[-100px] w-[500px] h-[500px] bg-primary/5 rounded-full blur-[120px] pointer-events-none" />
-      <div className="fixed top-[-100px] right-[-100px] w-[500px] h-[500px] bg-primary/5 rounded-full blur-[120px] pointer-events-none" />
+      <Footer />
 
-      {/* Footer */}
-      <footer className="mt-20 border-t border-white/10 py-12 bg-black">
-        <div className="container mx-auto px-6 flex flex-col md:flex-row justify-between items-center gap-8">
-          <div className="flex items-center gap-4">
-            <span className="text-[10px] font-black uppercase tracking-[0.3em] text-zinc-600 italic">MNEEBet © 2026. THE ARENA AWAITS.</span>
-          </div>
-          <div className="flex items-center gap-8">
-            <Link href="#" className="text-zinc-600 hover:text-white transition-colors"><Github className="w-4 h-4" /></Link>
-            <div className="text-[10px] font-bold text-zinc-600 uppercase tracking-widest">Built for the future.</div>
-          </div>
-        </div>
-      </footer>
+      {/* Background Decor */}
+      <div className="fixed bottom-[-10%] left-[-10%] w-[40%] h-[40%] bg-primary/10 rounded-full blur-[150px] pointer-events-none opacity-50" />
+      <div className="fixed top-[-10%] right-[-10%] w-[40%] h-[40%] bg-primary/10 rounded-full blur-[150px] pointer-events-none opacity-50" />
     </div>
   );
 }

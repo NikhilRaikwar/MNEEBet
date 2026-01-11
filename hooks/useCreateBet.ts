@@ -28,9 +28,6 @@ export function useCreateBet() {
     judge,
     decimals,
   }: CreateBetParams) => {
-    // Debug log
-    console.log('Creating bet with:', { opponent, amount, terms, deadline, judge, decimals });
-
     // Ensure 0x prefix is present or use Zero Address
     const opponentAddress: `0x${string}` = opponent ? opponent : '0x0000000000000000000000000000000000000000';
 

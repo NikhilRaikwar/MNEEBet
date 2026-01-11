@@ -66,14 +66,16 @@
     z-index: 10;
     background: linear-gradient(0deg, rgba(0, 0, 0, 0) 0%, rgba(204, 255, 0, 0.02) 50%, rgba(0, 0, 0, 0) 100%);
     opacity: 0.1;
-    position: absolute;
-    bottom: 100%;
+    position: fixed;
+    top: -100px;
+    left: 0;
+    pointer-events: none;
     animation: scanline 8s linear infinite;
   }
 
   @keyframes scanline {
-    0% { bottom: 100%; }
-    100% { bottom: -100%; }
+    0% { transform: translateY(0vh); }
+    100% { transform: translateY(120vh); }
   }
 
   .noise-overlay {
