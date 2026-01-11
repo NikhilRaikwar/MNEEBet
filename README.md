@@ -1,5 +1,17 @@
 # MNEEBet - Peer-to-Peer Betting Platform with MNEE Stablecoin
 
+<div align="center">
+
+![License](https://img.shields.io/badge/license-MIT-green)
+![Network](https://img.shields.io/badge/network-Sepolia-blue)
+![Token](https://img.shields.io/badge/token-MNEE-yellow)
+![Status](https://img.shields.io/badge/status-Live-success)
+![Build](https://img.shields.io/badge/build-passing-brightgreen)
+
+<img src="./public/mneebet.png" alt="MNEEBet Platform Preview" width="100%" style="border-radius: 10px; border: 1px solid #333;" />
+
+</div>
+
 ## 🎯 Project Overview
 
 MNEEBet is a decentralized peer-to-peer betting platform that uses **MNEE USD stablecoin** as the escrow currency. 
