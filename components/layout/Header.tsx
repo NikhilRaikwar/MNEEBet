@@ -23,7 +23,7 @@ export function Header() {
 
   const { isConnected } = useAccount();
 
-  const publicRoutes = ['/', '/manifesto', '/faq'];
+  const publicRoutes = ['/', '/manifesto', '/faq', '/architecture'];
   const isPublicRoute = publicRoutes.includes(pathname) || pathname.startsWith('/bets/');
 
   useEffect(() => {
@@ -35,8 +35,10 @@ export function Header() {
   const navLinks = isConnected ? [
     { name: 'THE_ARENA', href: '/dashboard', icon: LayoutDashboard },
     { name: 'CREATE_BET', href: '/create', icon: PlusCircle },
+    { name: 'PROTOCOL', href: '/architecture', icon: Terminal },
   ] : [
     { name: 'MANIFESTO', href: '/manifesto', icon: FileText },
+    { name: 'PROTOCOL', href: '/architecture', icon: Terminal },
     { name: 'FAQ', href: '/faq', icon: HelpCircle },
   ];
 

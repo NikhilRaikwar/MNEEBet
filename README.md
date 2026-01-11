@@ -59,39 +59,49 @@ View contracts: https://sepolia.etherscan.io/
 
 ---
 
-## � Project Flow
+## 📊 Project Flow
 
-### 🆔 Claim Identity
-Secure your unique on-chain username to build reputation and trust.
-<br/>
-<br/>
-<!-- Insert Claim Identity Image Here -->
-<br/>
-<br/>
+```mermaid
+sequenceDiagram
+    autonumber
+    participant C as Creator (Frontend)
+    participant O as Opponent (Frontend)
+    participant J as Judge (Frontend)
+    participant MT as MNEE Token Contract
+    participant BC as MNEEBet Contract
 
-### ✍️ Create Bet
-Define terms, set stakes in MNEE, and select a neutral judge.
-<br/>
-<br/>
-<!-- Insert Create Bet Image Here -->
-<br/>
-<br/>
+    Note over C, BC: Registration Phase
+    C->>BC: registerUsername(username)
+    BC-->>C: Confirm Registration
 
-### 🛒 Bets Market
-Browse active wagers, accept open challenges, and view global activity.
-<br/>
-<br/>
-<!-- Insert Bets Market Image Here -->
-<br/>
-<br/>
+    Note over C, BC: Bet Creation Phase
+    C->>MT: approve(MNEEBet, amount)
+    MT-->>C: Approval Success
+    C->>BC: createBet(opponent, amount, terms, deadline, judge)
+    BC->>MT: transferFrom(creator, MNEEBet, amount)
+    MT-->>BC: Success (Escrow)
+    BC-->>C: BetCreated (Status: Open)
 
-### 🔍 Explorer
-Track transaction history, verify outcomes, and audit judge performance.
-<br/>
-<br/>
-<!-- Insert Explorer Image Here -->
-<br/>
-<br/>
+    Note over O, BC: Bet Acceptance Phase
+    O->>MT: approve(MNEEBet, amount)
+    MT-->>O: Approval Success
+    O->>BC: acceptBet(betId)
+    BC->>MT: transferFrom(opponent, MNEEBet, amount)
+    MT-->>BC: Success (Escrow)
+    BC-->>O: BetAccepted (Status: Active)
+
+    Note over J, BC: Settlement Phase (After Deadline)
+    J->>BC: resolveWithJudge(betId, winner)
+    alt Creator Wins
+        BC->>MT: transfer(creator, totalPot)
+    else Opponent Wins
+        BC->>MT: transfer(opponent, totalPot)
+    else Draw
+        BC->>MT: transfer(creator, amount)
+        BC->>MT: transfer(opponent, amount)
+    end
+    BC-->>J: BetResolved (Status: Resolved)
+```
 
 ---
 
@@ -117,6 +127,8 @@ Track transaction history, verify outcomes, and audit judge performance.
 ✅ **Username System** - Optional user registration
 ✅ **View Helpers** - `getPayoutInfo()`, `getBetsInRange()`, `getActiveBetsCount()`
 
+Detailed architecture breakdown and protocol flows are available in [ARCHITECTURE.md](./ARCHITECTURE.md).
+
 ### Bet Lifecycle
 
 ```
@@ -127,6 +139,24 @@ stakes  stakes  decides
 0.1     0.1     winner
 MNEE    MNEE    → 0.2 MNEE
 ```
+
+---
+
+## 🗺️ Protocol Roadmap
+
+### Phase 1: MVP (Complete)
+- **Status**: [Live on Sepolia]
+- **Deliverables**: P2P betting engine, MNEE escrow integration, human judge resolution, decentralized username system.
+
+### Phase 2: Mainnet & Audit (Q2 2026)
+- **Deployment**: Migrate to Ethereum Mainnet using the real MNEE token (`0x8ccedbAe4916b79da7F3F612EfB2EB93A2bFD6cF`).
+- **Security**: Full smart contract audit and bug bounty program.
+- **Features**: Support for multi-party bets and tournament mode.
+
+### Phase 3: AI & Oracles (Q4 2026+)
+- **AI Integration**: AI-powered resolution assistants to help judges analyze evidence.
+- **Betting Oracles**: Automated settlement for data-driven markets (Sports, Finance, API-based events).
+- **Mobile**: Launch of a high-performance Mobile App (PWA).
 
 ---
 
@@ -174,13 +204,6 @@ MNEEBet demonstrates:
 - ✅ **Instant Settlement**: Atomic transfers of stablecoin value
 - ✅ **Trust-Minimized Coordination**: Judge decides, contract executes
 - ✅ **Scalability Ready**: Can extend to multi-party bets, tournaments
-
-### Real-World Applications
-
-- 🎲 Sports betting with stablecoins
-- 📊 Market prediction platforms
-- ⚖️ Dispute resolution mechanisms
-- 🎮 Gaming with real value stakes
 
 ---
 
