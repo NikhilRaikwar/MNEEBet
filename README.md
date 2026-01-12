@@ -162,6 +162,9 @@ MNEEBet demonstrates programmable finance through:
 
 ### Protocol Flow
 
+![Flowchart](public/flowchart.png)
+
+
 ```mermaid
 sequenceDiagram
     autonumber
@@ -353,52 +356,51 @@ Smart Contract: MNEEBet.sol
 
 ## 🗺️ Roadmap
 
-### Phase 1: MVP ✅ (Current - Hackathon Submission)
-- **Status**: Complete on Sepolia Testnet
-- **Deliverables**:
-  - ✅ Core betting engine with judge resolution
-  - ✅ MNEE stablecoin integration (mock on testnet)
-  - ✅ Username registration system
-  - ✅ Full-featured frontend interface
-  - ✅ Mobile-responsive design
+### Immediate (Post-Hackathon)
+- **🚀 Mainnet Deployment**
+  - Secure 0.03-0.05 ETH for deployment gas
+  - Deploy to Ethereum with real MNEE token (`0x8ccedbAe4916b79da7F3F612EfB2EB93A2bFD6cF`)
+  - Launch to real users with real USD-backed stakes
+- **🔐 Security Audit**
+  - Engage professional audit firm
+  - Launch bug bounty program
+  - Community security review
 
-### Phase 2: Mainnet Launch 🎯 (Q1 2026)
-- **Deployment**:
-  - Deploy to Ethereum Mainnet with real MNEE token
-  - Security audit by reputable firm
-  - Bug bounty program launch
-- **Features**:
+### Phase 2 (Q1-Q2 2026)
+- **📊 Enhanced Features**
   - Multi-party bets (3+ participants)
-  - Tournament mode (bracket-style competitions)
-  - Enhanced judge reputation system
-
-### Phase 3: Ecosystem Expansion 🚀 (Q2-Q3 2026)
-- **AI Integration**:
-  - AI-powered resolution assistants
+  - Tournament mode (bracket-style)
+  - Judge reputation scores
+  - Bet templates for common use cases
+- **🤖 AI Integration**
+  - AI-powered bet term suggestions
   - Natural language bet creation
-  - Automated evidence analysis for judges
-- **Oracle Integration**:
-  - Chainlink price feeds for sports/events
+  - Evidence analysis for judges
+  - Fraud detection
+
+### Phase 3 (Q3-Q4 2026)
+- **🔗 Oracle Integration**
+  - Chainlink price feeds for sports
   - Automated settlement for data-driven markets
   - API-based outcome verification
-- **Mobile App**:
-  - Native iOS and Android apps
-  - Push notifications for bet updates
+  - Hybrid judge + oracle resolution
+- **📱 Mobile Apps**
+  - Native iOS and Android
+  - Push notifications
   - Streamlined mobile UX
+  - Offline bet creation
 
-### Phase 4: Governance & Scaling 🌐 (Q4 2026+)
-- **DAO Formation**:
-  - Community governance token
-  - Protocol parameter voting
-  - Treasury management
-- **L2 Expansion**:
-  - Deploy to Optimism, Arbitrum, Base
+### Phase 4 (2027+)
+- **🌐 Ecosystem Expansion**
+  - Deploy to L2s (Optimism, Arbitrum, Base)
   - Cross-chain bet bridging
-  - Lower gas costs for users
-- **Advanced Features**:
-  - NFT integration (bet receipts as NFTs)
-  - Betting pools and syndicates
+  - DAO governance with token
   - Professional sports betting support
+- **💼 B2B Offerings**
+  - White-label betting infrastructure
+  - API for third-party integrations
+  - Corporate challenge platforms
+  - Esports integration
 
 ---
 
@@ -555,18 +557,11 @@ NEXT_PUBLIC_WALLETCONNECT_PROJECT_ID=<your-project-id>
 ### Documentation
 - [Protocol Architecture](./ARCHITECTURE.md)
 - [Smart Contract Source](./contracts/MNEEBet.sol)
-- [API Reference](./docs/API.md)
 - [FAQ](./docs/FAQ.md)
 
 ### MNEE Token Resources
 - [MNEE Website](https://mnee.io)
-- [MNEE Whitepaper](https://mnee.io/whitepaper)
 - [MNEE Token Contract](https://etherscan.io/token/0x8ccedbAe4916b79da7f3f612efb2eb93a2bfd6cf)
-
-### Community
-- Twitter: [@MNEEBet](https://twitter.com/MNEEBet)
-- GitHub: [NikhilRaikwar/MNEEBet](https://github.com/NikhilRaikwar/MNEEBet)
-- Discord: [Join our community](https://discord.gg/mneebet)
 
 ---
 

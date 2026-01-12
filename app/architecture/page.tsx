@@ -161,22 +161,22 @@ export default function ArchitecturePage() {
               <h2 className="text-4xl font-black text-white uppercase italic tracking-tighter">Strategic Roadmap</h2>
             </div>
 
-            <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
-              {/* Phase 1 */}
+            <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
+              {/* Phase 1 - Immediate */}
               <div className="p-8 border-2 border-primary bg-primary/5 space-y-6 relative overflow-hidden">
                 <div className="absolute top-0 right-0 p-4 bg-primary text-black font-black text-[10px] uppercase tracking-widest italic">
-                  COMPLETED
+                  NEXT_STEP
                 </div>
                 <div className="space-y-2">
-                  <div className="text-[10px] font-black text-primary tracking-widest uppercase italic">PHASE_01</div>
-                  <h3 className="text-2xl font-black text-white uppercase italic tracking-tight">MVP Launch</h3>
+                  <div className="text-[10px] font-black text-primary tracking-widest uppercase italic">IMMEDIATE</div>
+                  <h3 className="text-2xl font-black text-white uppercase italic tracking-tight">Mainnet & Security</h3>
                 </div>
                 <ul className="space-y-3">
                   {[
-                    'P2P Betting Engine',
-                    'MNEE Escrow System',
-                    'Judge Resolution Flow',
-                    'Sepolia Testnet Live'
+                    'Secure Deployment Gas',
+                    'Ethereum Mainnet Launch',
+                    'Real MNEE Integration',
+                    'Professional Audit & Bounty'
                   ].map((item, i) => (
                     <li key={i} className="flex items-center gap-3 text-zinc-300 text-sm font-medium italic">
                       <CheckCircle2 className="w-4 h-4 text-primary" />
@@ -189,15 +189,15 @@ export default function ArchitecturePage() {
               {/* Phase 2 */}
               <div className="p-8 border-2 border-white/5 bg-white/[0.02] space-y-6">
                 <div className="space-y-2">
-                  <div className="text-[10px] font-black text-zinc-500 tracking-widest uppercase italic">PHASE_02</div>
-                  <h3 className="text-2xl font-black text-white uppercase italic tracking-tight">Mainnet Expansion</h3>
+                  <div className="text-[10px] font-black text-zinc-500 tracking-widest uppercase italic">PHASE_02 (Q1-Q2 2026)</div>
+                  <h3 className="text-2xl font-black text-white uppercase italic tracking-tight">Features & AI</h3>
                 </div>
                 <ul className="space-y-3">
                   {[
-                    'ETH Mainnet Deployment',
-                    'MNEE Real-Token Integration',
-                    'Full Protocol Audit',
-                    'Tournament Support'
+                    'Multi-party & Tournaments',
+                    'AI Bet Term Suggestions',
+                    'Natural Language Creation',
+                    'Fraud Detection AI'
                   ].map((item, i) => (
                     <li key={i} className="flex items-center gap-3 text-zinc-400 text-sm font-medium italic">
                       <div className="w-1.5 h-1.5 rounded-full bg-zinc-700" />
@@ -205,21 +205,20 @@ export default function ArchitecturePage() {
                     </li>
                   ))}
                 </ul>
-                <div className="pt-4 text-[10px] font-black text-zinc-600 tracking-widest uppercase italic">ETA: Q2 2026</div>
               </div>
 
               {/* Phase 3 */}
               <div className="p-8 border-2 border-white/5 bg-white/[0.02] space-y-6">
                 <div className="space-y-2">
-                  <div className="text-[10px] font-black text-zinc-500 tracking-widest uppercase italic">PHASE_03</div>
-                  <h3 className="text-2xl font-black text-white uppercase italic tracking-tight">Automation & AI</h3>
+                  <div className="text-[10px] font-black text-zinc-500 tracking-widest uppercase italic">PHASE_03 (Q3-Q4 2026)</div>
+                  <h3 className="text-2xl font-black text-white uppercase italic tracking-tight">Oracles & Mobile</h3>
                 </div>
                 <ul className="space-y-3">
                   {[
-                    'AI Resolution Assistant',
-                    'Chainlink Oracle Integration',
-                    'Mobile PWA App',
-                    'DAO Governance'
+                    'Chainlink Integration',
+                    'Automated Settlement',
+                    'Native iOS/Android Apps',
+                    'Offline Bet Creation'
                   ].map((item, i) => (
                     <li key={i} className="flex items-center gap-3 text-zinc-400 text-sm font-medium italic">
                       <div className="w-1.5 h-1.5 rounded-full bg-zinc-700" />
@@ -227,7 +226,27 @@ export default function ArchitecturePage() {
                     </li>
                   ))}
                 </ul>
-                <div className="pt-4 text-[10px] font-black text-zinc-600 tracking-widest uppercase italic">ETA: Q4 2026+</div>
+              </div>
+
+              {/* Phase 4 */}
+              <div className="p-8 border-2 border-white/5 bg-white/[0.02] space-y-6">
+                <div className="space-y-2">
+                  <div className="text-[10px] font-black text-zinc-500 tracking-widest uppercase italic">PHASE_04 (2027+)</div>
+                  <h3 className="text-2xl font-black text-white uppercase italic tracking-tight">Expansion & B2B</h3>
+                </div>
+                <ul className="space-y-3">
+                  {[
+                    'L2 Deployment (Op/Arb/Base)',
+                    'DAO Governance',
+                    'White-label Infrastructure',
+                    'Esports Integration'
+                  ].map((item, i) => (
+                    <li key={i} className="flex items-center gap-3 text-zinc-400 text-sm font-medium italic">
+                      <div className="w-1.5 h-1.5 rounded-full bg-zinc-700" />
+                      {item}
+                    </li>
+                  ))}
+                </ul>
               </div>
             </div>
           </div>
