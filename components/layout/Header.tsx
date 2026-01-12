@@ -43,9 +43,8 @@ export function Header() {
   ];
 
   return (
-    <header className={`sticky top-0 z-50 w-full transition-all duration-300 ${
-      scrolled ? 'h-16 bg-[#050505]/90 backdrop-blur-xl border-b-2 border-primary/20' : 'h-24 bg-transparent'
-    }`}>
+    <header className={`sticky top-0 z-50 w-full transition-all duration-300 ${scrolled ? 'h-16 bg-[#050505]/90 backdrop-blur-xl border-b-2 border-primary/20' : 'h-24 bg-transparent'
+      }`}>
       <div className="container mx-auto h-full flex items-center justify-between px-6">
         <div className="flex items-center gap-16">
           <Link href="/" className="flex items-center gap-3 group">
@@ -59,18 +58,17 @@ export function Header() {
 
           <nav className="hidden lg:flex items-center gap-10">
             {navLinks.map((link) => (
-              <Link 
-                key={link.name} 
-                href={link.href} 
-                className={`relative py-2 text-[10px] font-black tracking-[0.2em] uppercase transition-all group ${
-                  pathname === link.href ? 'text-primary' : 'text-zinc-500 hover:text-white'
-                }`}
+              <Link
+                key={link.name}
+                href={link.href}
+                className={`relative py-2 text-[10px] font-black tracking-[0.2em] uppercase transition-all group ${pathname === link.href ? 'text-primary' : 'text-zinc-500 hover:text-white'
+                  }`}
               >
                 <span className="flex items-center gap-2">
                   {link.name}
                 </span>
                 {pathname === link.href && (
-                  <motion.div 
+                  <motion.div
                     layoutId="nav-underline"
                     className="absolute -bottom-1 left-0 right-0 h-1 bg-primary"
                   />
@@ -106,41 +104,50 @@ export function Header() {
         </div>
       </div>
 
-          {/* Mobile Menu */}
-          <AnimatePresence>
-            {isMenuOpen && (
-              <motion.div 
-                initial={{ opacity: 0, x: '100%' }}
-                animate={{ opacity: 1, x: 0 }}
-                exit={{ opacity: 0, x: '100%' }}
-                transition={{ type: 'spring', damping: 25, stiffness: 200 }}
-                className="fixed inset-0 z-[100] lg:hidden bg-[#050505] flex flex-col p-10 pt-32"
+      {/* Mobile Menu */}
+      <AnimatePresence>
+        {isMenuOpen && (
+          <motion.div
+            initial={{ opacity: 0, x: '100%' }}
+            animate={{ opacity: 1, x: 0 }}
+            exit={{ opacity: 0, x: '100%' }}
+            transition={{ type: 'spring', damping: 25, stiffness: 200 }}
+            className="fixed inset-0 z-[100] lg:hidden bg-[#050505] flex flex-col p-6"
+          >
+            <div className="flex justify-end mb-8">
+              <Button
+                variant="ghost"
+                size="icon"
+                className="text-primary rounded-none border-2 border-primary/20 h-10 w-10 hover:bg-primary/10"
+                onClick={() => setIsMenuOpen(false)}
               >
-              <nav className="flex flex-col gap-8">
-                {navLinks.map((link) => (
-                  <Link
-                    key={link.name}
-                    href={link.href}
-                    className={`text-4xl font-black uppercase tracking-tighter ${
-                      pathname === link.href ? 'text-primary italic' : 'text-white'
+                <X className="h-5 w-5" />
+              </Button>
+            </div>
+            <nav className="flex flex-col gap-8">
+              {navLinks.map((link) => (
+                <Link
+                  key={link.name}
+                  href={link.href}
+                  className={`text-4xl font-black uppercase tracking-tighter ${pathname === link.href ? 'text-primary italic' : 'text-white'
                     }`}
-                    onClick={() => setIsMenuOpen(false)}
-                  >
-                    {link.name}
-                  </Link>
-                ))}
-              </nav>
-              <div className="mt-auto pt-10 border-t-2 border-white/5 flex flex-col gap-6">
-                <ConnectButton showBalance={true} />
-                {isConnected && (
-                  <Button className="w-full h-16 bg-primary text-black font-black text-xl rounded-none border-2 border-black uppercase shadow-[8px_8px_0px_0px_rgba(163,251,46,0.3)] active:shadow-none transition-all" asChild onClick={() => setIsMenuOpen(false)}>
-                    <Link href="/create">CREATE_BET</Link>
-                  </Button>
-                )}
-              </div>
-            </motion.div>
-          )}
-        </AnimatePresence>
+                  onClick={() => setIsMenuOpen(false)}
+                >
+                  {link.name}
+                </Link>
+              ))}
+            </nav>
+            <div className="mt-auto pt-10 border-t-2 border-white/5 flex flex-col gap-6">
+              <ConnectButton showBalance={true} />
+              {isConnected && (
+                <Button className="w-full h-16 bg-primary text-black font-black text-xl rounded-none border-2 border-black uppercase shadow-[8px_8px_0px_0px_rgba(163,251,46,0.3)] active:shadow-none transition-all" asChild onClick={() => setIsMenuOpen(false)}>
+                  <Link href="/create">CREATE_BET</Link>
+                </Button>
+              )}
+            </div>
+          </motion.div>
+        )}
+      </AnimatePresence>
     </header>
   );
 }
